@@ -1,0 +1,17 @@
+{
+  "name": "webcomponents",
+  "version": "1.0.0",
+  "description": "Playing around with webcomponents",
+  "main": "src/index.ts",
+  "repository": "git@github.com:syeo66/webcomponents.git",
+  "author": "Red Ochsenbein <red@redochsenbein.ch>",
+  "license": "0BSD",
+  "private": true,
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "devDependencies": {
+    "snowpack": "^3.8.8"
+  }
+}
