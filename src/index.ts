@@ -1,1 +1,2 @@
-alert('here')
+import './RedDatetime'
+import './RedHeading'
