@@ -5,7 +5,7 @@ class RedDropdown extends HTMLElement {
     super()
 
     const shadow = this.attachShadow({ mode: 'open' })
-    shadow.appendChild(optionTemplate.content.cloneNode(true))
+    shadow.appendChild(template.content.cloneNode(true))
 
     const current = shadow.querySelector('#current')
     if (current) {
@@ -31,8 +31,8 @@ class RedDropdown extends HTMLElement {
   }
 }
 
-const optionTemplate = document.createElement('template')
-optionTemplate.innerHTML = `
+const template = document.createElement('template')
+template.innerHTML = `
 <style>
 :host {
   display: inline-block;
