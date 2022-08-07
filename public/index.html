@@ -12,13 +12,20 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
-    <red-heading ></red-heading>
-    <red-datetime ></red-datetime>
-    <hr />
+    <red-heading></red-heading>
+    <red-datetime></red-datetime>
+
     <h2>A simple dropdown/select component</h2>
-    <red-dropdown >
+    <red-dropdown>
       <red-option value="1">One</red-option>
       <red-option value="2">Two</red-option>
+      <red-option value="3">Three</red-option>
+    </red-dropdown>
+
+    <h2>Set the selected option in dropdown</h2>
+    <red-dropdown>
+      <red-option value="1">One</red-option>
+      <red-option value="2" selected>Two</red-option>
       <red-option value="3">Three</red-option>
     </red-dropdown>
   </body>

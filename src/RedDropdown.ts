@@ -1,4 +1,7 @@
-// TODO make it work similarely to a select
+// TODO add change event
+// TODO make it work with form
+// TODO add outside click
+// TODO add escape key
 // TODO explore styling options from the outside
 class RedDropdown extends HTMLElement {
   constructor() {
@@ -8,26 +11,44 @@ class RedDropdown extends HTMLElement {
     shadow.appendChild(template.content.cloneNode(true))
 
     const current = shadow.querySelector('#current')
-    if (current) {
-      current.innerHTML = this.children[0].innerHTML
-    }
+
     current?.addEventListener('click', () => this.toggle())
     ;[...this.children].forEach((child) => {
       child.addEventListener('click', () => this.select(child))
     })
-    shadow.querySelector('#options')?.append(...this.children)
+
+    const firstHTML = this.children[0]?.innerHTML
+
+    const options = shadow.querySelector('#options')
+    options?.append(...this.children)
+
+    if (current) {
+      // eslint-disable-next-line no-console
+      const selected = shadow.querySelector('red-option[selected]')
+      // eslint-disable-next-line no-console
+      current.innerHTML = selected?.innerHTML || firstHTML
+    }
   }
 
   toggle() {
     this.shadowRoot?.querySelector('#options')?.classList.toggle('active')
   }
 
+  close() {
+    this.shadowRoot?.querySelector('#options')?.classList.remove('active')
+  }
+
   select(e: Element) {
+    this.shadowRoot?.querySelectorAll('red-option')?.forEach((elm) => elm.removeAttribute('selected'))
+    e.setAttribute('selected', '')
+
     const current = this.shadowRoot?.querySelector('#current')
+
     if (current) {
       current.innerHTML = e.innerHTML
     }
-    this.toggle()
+
+    this.close()
   }
 }
 
@@ -49,13 +70,15 @@ red-option, #current {
 }
 
 #options {
-  position: absolute;
+  background-color: #fff;
   border-radius: 0.25em;
   border: 1px solid #ccc;
-  transform-origin: top;
-  transition: transform 0.2s ease-in-out;
-  transform: scaleY(0);
   box-sizing: border-box;
+  position: absolute;
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 0.2s ease-in-out;
+  z-index: 2;
 }
 
 #options.active {
@@ -64,6 +87,10 @@ red-option, #current {
 
 red-option:hover {
   background-color: #eee;
+}
+
+red-option[selected] {
+  background-color: #ddd;
 }
 
 red-option:not(:last-child) {
